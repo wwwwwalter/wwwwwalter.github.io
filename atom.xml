@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wwwwwalter.github.io</id>
     <title>NoteBook</title>
-    <updated>2021-02-15T15:43:01.270Z</updated>
+    <updated>2021-02-15T16:21:30.349Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wwwwwalter.github.io"/>
     <link rel="self" href="https://wwwwwalter.github.io/atom.xml"/>
@@ -11,12 +11,17 @@
     <icon>https://wwwwwalter.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, NoteBook</rights>
     <entry>
-        <title type="html"><![CDATA[超能陆战队]]></title>
+        <title type="html"><![CDATA[《超能陆战队》观后感]]></title>
         <id>https://wwwwwalter.github.io/post/chao-neng-lu-zhan-dui/</id>
         <link href="https://wwwwwalter.github.io/post/chao-neng-lu-zhan-dui/">
         </link>
         <updated>2021-02-15T15:25:34.000Z</updated>
-        <content type="html"><![CDATA[<p>hello</p>
+        <content type="html"><![CDATA[<p><img src="https://wwwwwalter.github.io/post-images/1613405977321.png" alt="" loading="lazy"><br>
+当我感到要迷失在生活琐碎的事情中的时候，我的学习效率会降到极低，灵感也几乎为零。但是《超能陆战队》中营造的&quot;车库工作室&quot;氛围我特别喜欢。一间乱乱的房间，若干台趁手的主机和显示器，数不清的扳手、电烙铁以及的电路板，这些场景会立刻把我带入到精彩的程序世界。<br>
+<img src="https://wwwwwalter.github.io/post-images/1613405946989.png" alt="" loading="lazy"><br>
+学代码写代码真的是要发自内心的热爱，才能从茫茫的代码中找出自已想要的那部分代码，悉心维护，添砖加瓦，一行一行的码起来，最后用这些代码把灵感转化成现实。做出牛逼的产品也好，充满爱的产品也好。<br>
+<img src="https://wwwwwalter.github.io/post-images/1613405994206.png" alt="" loading="lazy"><br>
+<img src="https://wwwwwalter.github.io/post-images/1613406001028.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
