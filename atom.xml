@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wwwwwalter.github.io</id>
     <title>NoteBook</title>
-    <updated>2021-02-16T00:37:08.428Z</updated>
+    <updated>2021-02-16T01:42:04.257Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wwwwwalter.github.io"/>
     <link rel="self" href="https://wwwwwalter.github.io/atom.xml"/>
@@ -10,6 +10,18 @@
     <logo>https://wwwwwalter.github.io/images/avatar.png</logo>
     <icon>https://wwwwwalter.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, NoteBook</rights>
+    <entry>
+        <title type="html"><![CDATA[CMake一个简单强大的构建工具]]></title>
+        <id>https://wwwwwalter.github.io/post/cmake-yi-ge-jian-dan-qiang-da-de-gou-jian-gong-ju/</id>
+        <link href="https://wwwwwalter.github.io/post/cmake-yi-ge-jian-dan-qiang-da-de-gou-jian-gong-ju/">
+        </link>
+        <updated>2021-02-16T01:00:08.000Z</updated>
+        <content type="html"><![CDATA[<p><img src="https://wwwwwalter.github.io/post-images/1613439580694.png" alt="" loading="lazy"><br>
+最早接触CMake是在2018年，从github上clone下来的工程，很多是按照CMake工程结构维护的。当时还在网上看过几篇cmake的使用教程，自己在ubuntu上写了一个测试小工程，用cmake生成makefile，再用makefile编译源文件，这就是我当时对cmake的初步认识。<br>
+2020夏至2020年冬，在这半年的工作中我负责的工程中使用了很多第三方开源库，这些库的源码有些是用VS project维护的，有些是用CMake维护的。<br>
+三年后的今天，2021年春节在家，我想把cmake-cmd、cmake-gui以及cmake的跨平台功能仔细的研究一下。另外再写一篇关于makefile脚本的使用。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[《超能陆战队》观后感]]></title>
         <id>https://wwwwwalter.github.io/post/chao-neng-lu-zhan-dui/</id>

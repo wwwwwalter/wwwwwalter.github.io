@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>搜索 - NoteBook</title>
+<title>CMake一个简单强大的构建工具 | NoteBook</title>
 
 <link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1613439646120">
 
@@ -27,21 +25,11 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.0/dist/fuse.basic.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.3/ejs.min.js"></script>
-    <script src="https://wwwwwalter.github.io/media/gridea-search/gridea-search.js"></script>
-    <script src="https://wwwwwalter.github.io/media/gridea-search/result-template.ejs" type="text/ejs"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
-
 <body>
-    <style>
-        .searched-keyword {
-            background-color: yellow;
-            color: red;
-        }
-    </style>
-    <div class="main gt-bg-theme-color-first">
-        <nav class="navbar navbar-expand-lg">
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -97,16 +85,75 @@
     </div>
 </nav>
 
-        <div id="gridea-search-result" data-update="1613439646120">
-            <div class="searching" style="font-size: 18px; margin-top: 50px;">
-                <i class="fa fa-sync-alt fa-spin"></i>&nbsp;&nbsp;搜索中......
-                <br><br>
-                <span style="font-size: 65%; color: #aaa">第一次搜索可能需要耗费较长时间构建索引，请耐心等待...</span>
-            </div>
-            <div class="no-result" style="display:none; font-size: 20px; margin-top: 50px;">
-                <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;未搜索到相关文章，请更换关键词
-            </div>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    CMake一个简单强大的构建工具
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-02-16 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p><img src="https://wwwwwalter.github.io/post-images/1613439580694.png" alt="" loading="lazy"><br>
+最早接触CMake是在2018年，从github上clone下来的工程，很多是按照CMake工程结构维护的。当时还在网上看过几篇cmake的使用教程，自己在ubuntu上写了一个测试小工程，用cmake生成makefile，再用makefile编译源文件，这就是我当时对cmake的初步认识。<br>
+2020夏至2020年冬，在这半年的工作中我负责的工程中使用了很多第三方开源库，这些库的源码有些是用VS project维护的，有些是用CMake维护的。<br>
+三年后的今天，2021年春节在家，我想把cmake-cmd、cmake-gui以及cmake的跨平台功能仔细的研究一下。另外再写一篇关于makefile脚本的使用。</p>
+
+                </div>
+            </article>
         </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://wwwwwalter.github.io/post/chao-neng-lu-zhan-dui/" class="post-title gt-a-link">
+                    《超能陆战队》观后感
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/cmake-yi-ge-jian-dan-qiang-da-de-gou-jian-gong-ju/" class="leancloud_visitors" data-flag-title="CMake一个简单强大的构建工具">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '',
+		appKey: '',
+		avatar: '',
+		pageSize: 5,
+		recordIp: true,
+		placeholder: 'Thanks for reading!',
+		visitor: true,
+	});
+</script>
+
+        
+
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">温故而知新</div>
     <div class="social-container">
@@ -142,6 +189,6 @@
 </script>
 
     </div>
+</div>
 </body>
-
 </html>
