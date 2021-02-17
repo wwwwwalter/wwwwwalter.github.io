@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wwwwwalter.github.io</id>
     <title>NoteBook</title>
-    <updated>2021-02-16T03:16:28.456Z</updated>
+    <updated>2021-02-17T16:11:18.444Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wwwwwalter.github.io"/>
     <link rel="self" href="https://wwwwwalter.github.io/atom.xml"/>
@@ -10,6 +10,26 @@
     <logo>https://wwwwwalter.github.io/images/avatar.png</logo>
     <icon>https://wwwwwalter.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, NoteBook</rights>
+    <entry>
+        <title type="html"><![CDATA[Makefile脚本]]></title>
+        <id>https://wwwwwalter.github.io/post/makefile-jiao-ben/</id>
+        <link href="https://wwwwwalter.github.io/post/makefile-jiao-ben/">
+        </link>
+        <updated>2021-02-17T15:51:31.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="编译过程">编译过程</h1>
+<p><strong>1.预处理：头文件包含，宏展开，去注释</strong><br>
+<code>gcc -E main.c -o main.i</code><br>
+<strong>2.编译：做语法检查</strong><br>
+<code>gcc -S main.i -o main.s</code><br>
+<strong>3.汇编</strong>：<br>
+<code>gcc -c main.s -o main.o</code><br>
+<strong>4.链接</strong><br>
+<code>gcc main.o -o main</code><br>
+<strong>四步合为一步：</strong><br>
+<code>gcc main.c -o main</code></p>
+<h1 id="makefile">Makefile</h1>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CMake一个简单强大的构建工具]]></title>
         <id>https://wwwwwalter.github.io/post/cmake-yi-ge-jian-dan-qiang-da-de-gou-jian-gong-ju/</id>
