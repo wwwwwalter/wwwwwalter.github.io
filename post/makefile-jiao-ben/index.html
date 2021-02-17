@@ -6,7 +6,7 @@
 
 <title>Makefile脚本 | NoteBook</title>
 
-<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1613578783547">
+<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1613580217297">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wwwwwalter.github.io/styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1613578783547" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1613580217297" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -107,13 +107,35 @@
 <code>gcc -E main.c -o main.i</code><br>
 <strong>2.编译：做语法检查</strong><br>
 <code>gcc -S main.i -o main.s</code><br>
-<strong>3.汇编</strong>：<br>
+<strong>3.汇编</strong><br>
 <code>gcc -c main.s -o main.o</code><br>
 <strong>4.链接</strong><br>
 <code>gcc main.o -o main</code><br>
-<strong>四步合为一步：</strong><br>
-<code>gcc main.c -o main</code></p>
+<strong>四步合为一步</strong><br>
+<code>gcc main.c -o main</code><br>
+<strong>速记：ESc iso</strong></p>
+<p>https://blog.csdn.net/yredh_114/article/details/69389134</p>
 <h1 id="makefile">Makefile</h1>
+<p><strong>第一层</strong><br>
+<strong>第二层</strong><br>
+<strong>第三层</strong><br>
+<strong>第四层</strong><br>
+<strong>第五层</strong></p>
+<p>创建文本文档 取名makefile<br>
+#是注释<br>
+<strong>第一层：显式规则</strong><br>
+目标文件:依赖文件<br>
+[TAB]指令<br>
+第一个目标文件是我的最终目标</p>
+<pre><code>main:main.o
+    g++ main.o -o main.i
+main.o:main.S
+    g++ -c main.S -o main.o
+main.S:main.i
+    g++ -S main.i -o main.S
+main.i:main.cpp
+    g++ -E main.cpp -o main.i
+</code></pre>
 
                 </div>
             </article>
