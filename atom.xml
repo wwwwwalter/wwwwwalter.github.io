@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wwwwwalter.github.io</id>
     <title>NoteBook</title>
-    <updated>2021-02-17T16:44:30.413Z</updated>
+    <updated>2021-02-17T16:53:13.440Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wwwwwalter.github.io"/>
     <link rel="self" href="https://wwwwwalter.github.io/atom.xml"/>
@@ -40,15 +40,21 @@
 <strong>第一层：显式规则</strong><br>
 目标文件:依赖文件<br>
 [TAB]指令<br>
-第一个目标文件是最终目标</p>
+第一个目标文件是最终目标<br>
+rm -fr main.i main.S main.o main<br>
+伪目标：.PHONY:</p>
 <pre><code>main:main.o
-    g++ main.o -o main.i
+    g++ main.o -o main
 main.o:main.S
     g++ -c main.S -o main.o
 main.S:main.i
     g++ -S main.i -o main.S
 main.i:main.cpp
     g++ -E main.cpp -o main.i
+
+.PHONY
+clean:
+    rm -fr main.i main.S main.o main
 </code></pre>
 ]]></content>
     </entry>

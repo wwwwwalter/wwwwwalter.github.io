@@ -6,7 +6,7 @@
 
 <title>Makefile脚本 | NoteBook</title>
 
-<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1613580266643">
+<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1613580786989">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wwwwwalter.github.io/styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1613580266643" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1613580786989" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -126,15 +126,21 @@
 <strong>第一层：显式规则</strong><br>
 目标文件:依赖文件<br>
 [TAB]指令<br>
-第一个目标文件是最终目标</p>
+第一个目标文件是最终目标<br>
+rm -fr main.i main.S main.o main<br>
+伪目标：.PHONY:</p>
 <pre><code>main:main.o
-    g++ main.o -o main.i
+    g++ main.o -o main
 main.o:main.S
     g++ -c main.S -o main.o
 main.S:main.i
     g++ -S main.i -o main.S
 main.i:main.cpp
     g++ -E main.cpp -o main.i
+
+.PHONY
+clean:
+    rm -fr main.i main.S main.o main
 </code></pre>
 
                 </div>
