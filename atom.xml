@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wwwwwalter.github.io</id>
     <title>NoteBook</title>
-    <updated>2021-02-18T17:15:33.855Z</updated>
+    <updated>2021-02-18T19:18:02.308Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wwwwwalter.github.io"/>
     <link rel="self" href="https://wwwwwalter.github.io/atom.xml"/>
@@ -88,7 +88,8 @@ clean:
 <li>=(赋值)   使用等号左边的变量时，取右边变量最终值</li>
 <li>:=(赋值)  使用等号左边的变量是，取右边变量历史值</li>
 <li>?=(探测不到则赋值)</li>
-<li>+=(追加)</li>
+<li>+=(追加)<br>
+使用变量 $(变量名)</li>
 </ul>
 <pre><code>VIR_A = A
 VIR_B = $(VIR_A) B
@@ -106,9 +107,70 @@ all:
 	echo ${VIR_B}
 #A B
 </code></pre>
-<p>第三层<br>
-第四层<br>
-第五层</p>
+<pre><code>TAR:=test
+OBJ=circle.o cube.o test.o
+CC:=gcc
+
+
+$(TAR):$(OBJ)
+	$(CC) $(OBJ) -o $(TAR)
+test.o:test.c
+	$(CC) -c test.c -o test.o
+circle.o:circle.c
+	$(CC) -c circle.c -o circle.o
+cube.o:cube.c
+	$(CC) -c cube.c -o cube.o
+
+.PHONY:
+clean:
+	rm $(OBJ) $(TAR)
+</code></pre>
+<p><strong>第三层：隐含规则</strong><br>
+*.c     *.o：所有的.c或者.o<br>
+%.c  %.o：任意的.c或者.o</p>
+<pre><code>TAR:=test
+OBJ=circle.o cube.o test.o
+CC:=gcc
+
+
+
+$(TAR):$(OBJ)
+	$(CC) $(OBJ) -o $(TAR)
+*.o:*.c
+	$(CC) -c %.c -o %.o
+
+
+.PHONY:
+clean:
+	rm $(OBJ) $(TAR)
+</code></pre>
+<p><strong>第四层：通配符</strong></p>
+<ul>
+<li>$@所有的目标文件</li>
+<li>$^所有的依赖文件</li>
+<li>$&lt;所有的依赖文件的第一个文件</li>
+<li>$*不包含拓展名的目标文件名称</li>
+<li>$+所有的依赖文件，以空格分开，并以出现的先后为序，可能包含重复的依赖</li>
+<li>$?所有时间戳比目标文件晚的依赖文件，并以空格分开</li>
+</ul>
+<pre><code>TAR:=test
+OBJ=circle.o cube.o test.o
+CC:=gcc
+RMRF:=rm -rf
+
+
+
+$(TAR):$(OBJ)
+	$(CC) $^ -o $@
+%.o:%.c
+	$(CC) -c $^ -o $@
+
+
+.PHONY:
+clean:
+	$(RMRF) $(OBJ) $(TAR)
+</code></pre>
+<p><strong>第五层：函数</strong></p>
 ]]></content>
     </entry>
     <entry>
