@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wwwwwalter.github.io</id>
-    <title>NoteBook</title>
-    <updated>2021-02-24T18:10:57.124Z</updated>
+    <title>Albert NoteBook</title>
+    <updated>2021-02-24T18:12:05.315Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wwwwwalter.github.io"/>
     <link rel="self" href="https://wwwwwalter.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://wwwwwalter.github.io/images/avatar.png</logo>
     <icon>https://wwwwwalter.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, NoteBook</rights>
+    <rights>All rights reserved 2021, Albert NoteBook</rights>
     <entry>
         <title type="html"><![CDATA[Makefile脚本]]></title>
         <id>https://wwwwwalter.github.io/post/makefile-jiao-ben/</id>
