@@ -6,7 +6,7 @@
 
 <title>Makefile脚本 | NoteBook</title>
 
-<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1613675938282">
+<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1614190120085">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wwwwwalter.github.io/styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1613675938282" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1614190120085" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -233,6 +233,52 @@ clean:
 	$(RMRF) $(OBJ) $(TAR)
 </code></pre>
 <p><strong>第五层：函数</strong></p>
+<h1 id="makefile第二篇">Makefile第二篇</h1>
+<pre><code>#当想要指定makefile文件名时，在执行的时，需要使用下面的命令
+#make -f  my_mkfile
+#Makefile中的规则有很多，一条规则一般由几个部分组成:
+
+#目标：依赖列表
+#		@shell命令列表
+
+all:A C B
+
+A:
+	@echo A
+B:
+	@echo B
+C:
+	@echo C
+
+#其中第一个条规则中的“目标”，将会成为终极目标。我们的最终目的，就是为了生成这个目标的。
+#其他的规则之间，没有必然的顺序关系，执行顺序和书写顺序无关，具体先执行哪一个由终极目标中的依赖列表顺序为准。
+#每一个规则中的目标，看似是一个文件，其实只是一个标签
+#每一个规则，不一定有依赖
+#每一个规则，不一定有命令
+#目标：依赖：依赖：依赖，形成一条链路，当哪一层的依赖文件比目标新，从这里网上都要重新编译。
+#通常情况下，目标和依赖都是具体的文件名
+#但是目标和文件名只是标签，具体的依赖和目标只用在shell命令中
+
+#当目标是标签，它代表的时间最老
+#当依赖是标签/null，它代表的时间最新
+
+#当依赖是标签时，下面一定要有这个目标，否则报错
+#当依赖是具体的文件时，只要目录里有，就不会报错，即使下面没有这个目标
+
+
+#当时间信息不对时，需要将时间调整 正确之后，才能使用make命令的。
+#Makefile是根据文件的时间信息，来调整是否需要重新编译。
+
+
+#如果想取消某一条命令本身的打印，那么可以在这个命令的前面加上@符号。
+#如果想忽略错误继续执行下面命令，那么可以在这个命令的前面加上-符号。
+
+all:
+	echo A
+	@echo A
+	-echo A
+	-@echo A
+</code></pre>
 
                 </div>
             </article>
