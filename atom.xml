@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wwwwwalter.github.io</id>
     <title>Albert NoteBook</title>
-    <updated>2021-02-27T16:39:16.538Z</updated>
+    <updated>2021-02-28T14:19:36.214Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wwwwwalter.github.io"/>
     <link rel="self" href="https://wwwwwalter.github.io/atom.xml"/>
@@ -10,6 +10,53 @@
     <logo>https://wwwwwalter.github.io/images/avatar.png</logo>
     <icon>https://wwwwwalter.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Albert NoteBook</rights>
+    <entry>
+        <title type="html"><![CDATA[makefile中打印进程号]]></title>
+        <id>https://wwwwwalter.github.io/post/makefile-zhong-da-yin-jin-cheng-hao/</id>
+        <link href="https://wwwwwalter.github.io/post/makefile-zhong-da-yin-jin-cheng-hao/">
+        </link>
+        <updated>2021-02-28T13:53:51.000Z</updated>
+        <content type="html"><![CDATA[<p>今天在学习makefile的时候，看到这样一个预定义的变量&quot;$$$$&quot;, @echo &quot;$$$$&quot;可以打印当前进程号，平时在写C语言的时候会自定义log，于是我自定义一个变量<code>DEBUG=@echo &quot;[$$$$]$@:$^\t&quot;</code>，在每个shell命令前引用这个变量，当执行make的时候，就能把每一组的<code>进程号、目标和依赖</code>打印出来，这在学习makefile模式规则的时候非常有用，分享一下心得。</p>
+<pre><code>TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+CC = gcc
+DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
+
+
+$(TGT):$(OBJ)
+	$(DEBUG) $(CC) $^ -o $@
+
+%.o:%.c
+	$(DEBUG) $(CC)  -c $^ -o $@
+
+
+.PHONY:
+clean:
+	rm $(OBJ) $(TGT)
+</code></pre>
+<p>make<br>
+[4488]test.o:test.c      gcc -c test.c -o test.o<br>
+[4489]cube.o:cube.c      gcc -c cube.c -o cube.o<br>
+[4490]circle.o:circle.c  gcc -c circle.c -o circle.o<br>
+[4491]a.out:test.o cube.o circle.o       gcc test.o cube.o circle.o -o a.out</p>
+<p>4488 4489 4490说明模式格则被调用的次数，取决于上一曾中依赖的个数，<br>
+上一层依赖：OBJ = test.o cube.o circle.o，就是下一层模式规则中的目标，<br>
+所以模式规则被独立的调用了3次。<br>
+另外，模式规则我把他理解为一个函数，</p>
+<ul>
+<li>目标相当于返回值</li>
+<li>依赖相当于形参</li>
+<li>shell命令相当于函数体
+<ul>
+<li><code>每一行一个进程，不管这一行有多少命令</code></li>
+</ul>
+</li>
+</ul>
+<p>总结，之前也学过makefile的语法，感觉规则挺多的，有些模式规则看过自己根本写不出来，如果用C语言的思想来看待makefile,发现一切都在情理之中。<br>
+未完待续... ...</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[git和github]]></title>
         <id>https://wwwwwalter.github.io/post/git-he-github/</id>

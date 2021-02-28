@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>CMake一个简单强大的构建工具 | Albert NoteBook</title>
+<title>makefile中打印进程号 | Albert NoteBook</title>
 
 <link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1614521950915">
 
@@ -89,23 +89,54 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    CMake一个简单强大的构建工具
+                    makefile中打印进程号
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2021-02-16 ·
+                        · 2021-02-28 ·
                     </time>
-                    
-                        <a href="https://wwwwwalter.github.io/tag/zspsgT7cj/" class="post-tags">
-                            # cmake
-                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <p><img src="https://wwwwwalter.github.io/post-images/1613439580694.png" alt="" loading="lazy"><br>
-最早接触CMake是在2018年，从github上clone下来的工程，很多是按照CMake工程结构维护的。当时还在网上看过几篇cmake的使用教程，自己在ubuntu上写了一个测试小工程，用cmake生成makefile，再用makefile编译源文件，这就是我当时对cmake的初步认识。<br>
-2020夏至2020年冬，在这半年的工作中我负责的工程中使用了很多第三方开源库，比如图形库OpenCV，这些库的源码有些是用VS project维护的，有些是用CMake维护的。<br>
-三年后的今天，2021年春节在家，我想把cmake-cmd、cmake-gui以及cmake的跨平台功能仔细的研究一下。想深入学习，最终都是要去看源码的，亲自改一改编一编，都少不了cmake的使用。另外再写一篇关于makefile脚本的使用。</p>
+                    <p>今天在学习makefile的时候，看到这样一个预定义的变量&quot;$$$$&quot;, @echo &quot;$$$$&quot;可以打印当前进程号，平时在写C语言的时候会自定义log，于是我自定义一个变量<code>DEBUG=@echo &quot;[$$$$]$@:$^\t&quot;</code>，在每个shell命令前引用这个变量，当执行make的时候，就能把每一组的<code>进程号、目标和依赖</code>打印出来，这在学习makefile模式规则的时候非常有用，分享一下心得。</p>
+<pre><code>TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+CC = gcc
+DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
+
+
+$(TGT):$(OBJ)
+	$(DEBUG) $(CC) $^ -o $@
+
+%.o:%.c
+	$(DEBUG) $(CC)  -c $^ -o $@
+
+
+.PHONY:
+clean:
+	rm $(OBJ) $(TGT)
+</code></pre>
+<p>make<br>
+[4488]test.o:test.c      gcc -c test.c -o test.o<br>
+[4489]cube.o:cube.c      gcc -c cube.c -o cube.o<br>
+[4490]circle.o:circle.c  gcc -c circle.c -o circle.o<br>
+[4491]a.out:test.o cube.o circle.o       gcc test.o cube.o circle.o -o a.out</p>
+<p>4488 4489 4490说明模式格则被调用的次数，取决于上一曾中依赖的个数，<br>
+上一层依赖：OBJ = test.o cube.o circle.o，就是下一层模式规则中的目标，<br>
+所以模式规则被独立的调用了3次。<br>
+另外，模式规则我把他理解为一个函数，</p>
+<ul>
+<li>目标相当于返回值</li>
+<li>依赖相当于形参</li>
+<li>shell命令相当于函数体
+<ul>
+<li><code>每一行一个进程，不管这一行有多少命令</code></li>
+</ul>
+</li>
+</ul>
+<p>总结，之前也学过makefile的语法，感觉规则挺多的，有些模式规则看过自己根本写不出来，如果用C语言的思想来看待makefile,发现一切都在情理之中。<br>
+未完待续... ...</p>
 
                 </div>
             </article>
@@ -114,8 +145,8 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://wwwwwalter.github.io/post/chao-neng-lu-zhan-dui/" class="post-title gt-a-link">
-                    《超能陆战队》观后感
+                <a href="https://wwwwwalter.github.io/post/git-he-github/" class="post-title gt-a-link">
+                    git和github
                 </a>
             </div>
         
