@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wwwwwalter.github.io</id>
     <title>Albert NoteBook</title>
-    <updated>2021-02-28T15:39:10.372Z</updated>
+    <updated>2021-02-28T18:00:26.858Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wwwwwalter.github.io"/>
     <link rel="self" href="https://wwwwwalter.github.io/atom.xml"/>
@@ -10,6 +10,208 @@
     <logo>https://wwwwwalter.github.io/images/avatar.png</logo>
     <icon>https://wwwwwalter.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Albert NoteBook</rights>
+    <entry>
+        <title type="html"><![CDATA[Makefile脚本第二篇]]></title>
+        <id>https://wwwwwalter.github.io/post/makefile-jiao-ben-di-er-pian/</id>
+        <link href="https://wwwwwalter.github.io/post/makefile-jiao-ben-di-er-pian/">
+        </link>
+        <updated>2021-02-28T17:57:51.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>#当想要指定makefile文件名时，在执行的时，需要使用下面的命令
+#make -f  my_mkfile
+#Makefile中的规则有很多，一条规则一般由几个部分组成:
+
+#目标：依赖列表
+#		@shell命令列表
+
+all:A C B
+
+A:
+	@echo A
+B:
+	@echo B
+C:
+	@echo C
+
+#其中第一个条规则中的“目标”，将会成为终极目标。我们的最终目的，就是为了生成这个目标的。
+#其他的规则之间，没有必然的顺序关系，执行顺序和书写顺序无关，具体先执行哪一个由终极目标中的依赖列表顺序为准。
+#每一个规则中的目标，看似是一个文件，其实只是一个标签
+#每一个规则，不一定有依赖
+#每一个规则，不一定有命令
+#目标：依赖：依赖：依赖，形成一条链路，当哪一层的依赖文件比目标新，从这里网上都要重新编译。
+#通常情况下，目标和依赖都是具体的文件名
+#但是目标和文件名只是标签，具体的依赖和目标只用在shell命令中
+
+
+#目标或者依赖，本质上都是标签，优先真实文件列表中找
+#找不到，就去makefile中找，还找不到那说明makefile写的有问题，没有生成着这个依赖标签
+#配合$?测试
+
+#当时间信息不对时，需要将时间调整 正确之后，才能使用make命令的。
+#Makefile是根据文件的时间信息，来调整是否需要重新编译。
+
+
+#如果想取消某一条命令本身的打印，那么可以在这个命令的前面加上@符号。
+#如果想忽略错误继续执行下面命令，那么可以在这个命令的前面加上-符号。
+
+
+#打印信息
+all:
+	echo A
+	@echo A
+	-echo A
+	-@echo A
+
+
+
+#赋值
+B:=$A    #立即展开赋值
+C=$A	 #延迟展开赋值
+D?=$A	#条件赋值
+E+=$A	#追加赋值
+
+
+	
+
+#特殊变量
+all:A B C
+	echo $@  #当前规则中的目标 -&gt; all
+	echo $^  #当前规则中的所有依赖 -&gt; A B C
+	echo $&lt;  #当前依赖中的第一个 -&gt; A
+	echo $$  #转义
+	echo $*  #模式规则中的所有%匹配的部分，后缀名前面部分
+	echo $?  #模式规则中所有比所在规则中的目标新的文件组成的列表
+
+
+#引号
+all:
+	echo hello
+	echo 'hello'
+	echo &quot;hello&quot;
+
+#当前执行的进程的进程编号
+all:
+	echo '$$$$'   #$$
+	echo &quot;$$$$&quot;  #2512
+
+all:
+	@echo '$$$$’    #$$ 打印双$
+	@echo &quot;$$$$&quot;   #2545 打印当前进程号
+
+
+#没有依赖的目标可以叫标签
+clean:
+	rm -fr $@           #rm -fr clean
+	rm -fr $(TGT)    #rm -fr a.out
+
+
+#普通写法
+TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+CC = gcc
+
+
+$(TGT):$(OBJ)
+	$(CC) $^ -o $@
+
+test.o:test.c
+	$(CC) -c $^ -o $@
+
+cube.o:cube.c
+	$(CC) -c $^ -o $@
+
+circle.o:circle.c
+	$(CC) -c $^ -o $@
+
+
+.PHONY:
+clean:
+	rm $(OBJ) $(TGT)
+
+#模式规则-&gt;可以理解为C语言的函数，有输入类型和输出类型
+TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+CC = gcc
+
+
+$(TGT):$(OBJ)
+	@echo &quot;main:$$$$&quot;
+
+%.o:%.c   #模式规则-&gt;可以理解为C语言的函数，有输入类型和输出类型
+	@echo &quot;sub:$$$$&quot;	#这句会打印出3个不同的进程号，说明模式函数被调用了3次
+
+
+.PHONY:
+clean:
+	rm $(OBJ) $(TGT)
+# sub:4194
+# sub:4195
+# sub:4196
+# main:4197
+
+# 今天在学习makefile的时候，看到这样一个预定义的变量&quot;$$$$&quot;,
+# @echo &quot;$$$$&quot;可以打印当前进程号，平时写C语言的时候会自定义log,
+# 于是我自定义一个变量DEBUG=@echo &quot;[$$$$]$@:$^\t&quot;,
+# 在每个shell命令前引用这个变量，当执行make的时候,
+# 就能把每一组的进程号、目标和依赖打印出来,
+# 这在学习makefile模式规则的时候非常有用，分享一下心得。
+#其实这样写，并没有生成任何目标文件，只是把步骤打印出来了
+#如果要正常运行，把$(DEBUG)去掉就行了
+TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+CC = gcc
+DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
+
+
+$(TGT):$(OBJ)
+	$(DEBUG) $(CC) $^ -o $@
+
+%.o:%.c
+	$(DEBUG) $(CC)  -c $^ -o $@
+
+
+.PHONY:
+clean:
+	rm $(OBJ) $(TGT)
+
+# [4488]test.o:test.c      gcc -c test.c -o test.o
+# [4489]cube.o:cube.c      gcc -c cube.c -o cube.o
+# [4490]circle.o:circle.c  gcc -c circle.c -o circle.o
+# [4491]a.out:test.o cube.o circle.o       gcc test.o cube.o circle.o -o a.out
+
+
+# 4488 4489 4490说明模式规则被调用的次数，取决于上一层中依赖的个数，
+# 上一层依赖：OBJ = test.o cube.o circle.o，就是下一层模式规则中的目标，
+# 所以模式规则被独立的调用了3次。
+# 另外，模式规则我把他理解为一个函数，
+# 目标相当于返回值
+# 依赖相当于形参
+# shell命令相当于函数体
+# 每一行一个进程，不管这一行有多少命令
+# 总结，之前也学过makefile的语法，感觉规则挺多的，有些模式规则看过自己根本写不出来，如果用C语言的思想来看待makefile,发现一切都在情理之中。
+
+#隐含规则
+TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+CC = gcc
+DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
+
+
+$(TGT):$(OBJ)
+	$(DEBUG) $(CC) $^ -o $@
+
+
+.PHONY:
+clean:
+	rm $(OBJ) $(TGT)
+
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[点亮我的战斗天使Alita]]></title>
         <id>https://wwwwwalter.github.io/post/dian-liang-wo-de-zhan-dou-tian-shi-alita/</id>
@@ -178,22 +380,6 @@ clean:
 <p><strong>第三层：隐含规则</strong><br>
 *.c     *.o：所有的.c或者.o<br>
 %.c  %.o：任意的.c或者.o</p>
-<pre><code>TAR:=test
-OBJ=circle.o cube.o test.o
-CC:=gcc
-
-
-
-$(TAR):$(OBJ)
-	$(CC) $(OBJ) -o $(TAR)
-*.o:*.c
-	$(CC) -c %.c
-
-
-.PHONY:
-clean:
-	rm $(OBJ) $(TAR)
-</code></pre>
 <p><strong>第四层：通配符</strong></p>
 <ul>
 <li>$@所有的目标文件</li>
@@ -221,52 +407,6 @@ clean:
 	$(RMRF) $(OBJ) $(TAR)
 </code></pre>
 <p><strong>第五层：函数</strong></p>
-<h1 id="makefile第二篇">Makefile第二篇</h1>
-<pre><code>#当想要指定makefile文件名时，在执行的时，需要使用下面的命令
-#make -f  my_mkfile
-#Makefile中的规则有很多，一条规则一般由几个部分组成:
-
-#目标：依赖列表
-#		@shell命令列表
-
-all:A C B
-
-A:
-	@echo A
-B:
-	@echo B
-C:
-	@echo C
-
-#其中第一个条规则中的“目标”，将会成为终极目标。我们的最终目的，就是为了生成这个目标的。
-#其他的规则之间，没有必然的顺序关系，执行顺序和书写顺序无关，具体先执行哪一个由终极目标中的依赖列表顺序为准。
-#每一个规则中的目标，看似是一个文件，其实只是一个标签
-#每一个规则，不一定有依赖
-#每一个规则，不一定有命令
-#目标：依赖：依赖：依赖，形成一条链路，当哪一层的依赖文件比目标新，从这里网上都要重新编译。
-#通常情况下，目标和依赖都是具体的文件名
-#但是目标和文件名只是标签，具体的依赖和目标只用在shell命令中
-
-#当目标是标签，它代表的时间最老
-#当依赖是标签/null，它代表的时间最新
-
-#当依赖是标签时，下面一定要有这个目标，否则报错
-#当依赖是具体的文件时，只要目录里有，就不会报错，即使下面没有这个目标
-
-
-#当时间信息不对时，需要将时间调整 正确之后，才能使用make命令的。
-#Makefile是根据文件的时间信息，来调整是否需要重新编译。
-
-
-#如果想取消某一条命令本身的打印，那么可以在这个命令的前面加上@符号。
-#如果想忽略错误继续执行下面命令，那么可以在这个命令的前面加上-符号。
-
-all:
-	echo A
-	@echo A
-	-echo A
-	-@echo A
-</code></pre>
 ]]></content>
     </entry>
     <entry>
