@@ -6,7 +6,7 @@
 
 <title>Makefile脚本第二篇 | Albert NoteBook</title>
 
-<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1614535217589">
+<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1615910570354">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wwwwwalter.github.io/styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1614535217589" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1615910570354" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -98,12 +98,12 @@
                     
                 </div>
                 <div class="post-content">
-                    <pre><code>#当想要指定makefile文件名时，在执行的时，需要使用下面的命令
-#make -f  my_mkfile
-#Makefile中的规则有很多，一条规则一般由几个部分组成:
+                    <pre><code># 当想要指定makefile文件名时，在执行的时，需要使用下面的命令
+# make -f  my_mkfile
+# Makefile中的规则有很多，一条规则一般由几个部分组成:
 
-#目标：依赖列表
-#		@shell命令列表
+# 目标：依赖列表
+# 		@shell命令列表
 
 all:A C B
 
@@ -114,29 +114,29 @@ B:
 C:
 	@echo C
 
-#其中第一个条规则中的“目标”，将会成为终极目标。我们的最终目的，就是为了生成这个目标的。
-#其他的规则之间，没有必然的顺序关系，执行顺序和书写顺序无关，具体先执行哪一个由终极目标中的依赖列表顺序为准。
-#每一个规则中的目标，看似是一个文件，其实只是一个标签
-#每一个规则，不一定有依赖
-#每一个规则，不一定有命令
-#目标：依赖：依赖：依赖，形成一条链路，当哪一层的依赖文件比目标新，从这里网上都要重新编译。
-#通常情况下，目标和依赖都是具体的文件名
-#但是目标和文件名只是标签，具体的依赖和目标只用在shell命令中
+# 其中第一个条规则中的“目标”，将会成为终极目标。我们的最终目的，就是为了生成这个目标的。
+# 其他的规则之间，没有必然的顺序关系，执行顺序和书写顺序无关，具体先执行哪一个由终极目标中的依赖列表顺序为准。
+# 每一个规则中的目标，看似是一个文件，其实只是一个标签
+# 每一个规则，不一定有依赖
+# 每一个规则，不一定有命令
+# 目标：依赖：依赖：依赖，形成一条链路，当哪一层的依赖文件比目标新，从这里网上都要重新编译。
+# 通常情况下，目标和依赖都是具体的文件名
+# 但是目标和文件名只是标签，具体的依赖和目标只用在shell命令中
 
 
-#目标或者依赖，本质上都是标签，优先真实文件列表中找
-#找不到，就去makefile中找，还找不到那说明makefile写的有问题，没有生成着这个依赖标签
-#配合$?测试
+# 目标或者依赖，本质上都是标签，优先真实文件列表中找
+# 找不到，就去makefile中找，还找不到那说明makefile写的有问题，没有生成着这个依赖标签
+# 配合$?测试
 
-#当时间信息不对时，需要将时间调整 正确之后，才能使用make命令的。
-#Makefile是根据文件的时间信息，来调整是否需要重新编译。
-
-
-#如果想取消某一条命令本身的打印，那么可以在这个命令的前面加上@符号。
-#如果想忽略错误继续执行下面命令，那么可以在这个命令的前面加上-符号。
+# 当时间信息不对时，需要将时间调整 正确之后，才能使用make命令的。
+# Makefile是根据文件的时间信息，来调整是否需要重新编译。
 
 
-#打印信息
+# 如果想取消某一条命令本身的打印，那么可以在这个命令的前面加上@符号。
+# 如果想忽略错误继续执行下面命令，那么可以在这个命令的前面加上-符号。
+
+
+# 打印信息
 all:
 	echo A
 	@echo A
@@ -206,11 +206,11 @@ circle.o:circle.c
 	$(CC) -c $^ -o $@
 
 
-.PHONY:
+.PHONY:clean
 clean:
 	rm $(OBJ) $(TGT)
 
-#模式规则-&gt;可以理解为C语言的函数，有输入类型和输出类型
+# 模式规则-&gt;可以理解为C语言的函数，有输入类型和输出类型
 TGT = a.out
 SRCS = test.c cube.c circle.c
 OBJ = test.o cube.o circle.o
@@ -224,7 +224,7 @@ $(TGT):$(OBJ)
 	@echo &quot;sub:$$$$&quot;	#这句会打印出3个不同的进程号，说明模式函数被调用了3次
 
 
-.PHONY:
+.PHONY:clean
 clean:
 	rm $(OBJ) $(TGT)
 # sub:4194
@@ -238,8 +238,6 @@ clean:
 # 在每个shell命令前引用这个变量，当执行make的时候,
 # 就能把每一组的进程号、目标和依赖打印出来,
 # 这在学习makefile模式规则的时候非常有用，分享一下心得。
-#其实这样写，并没有生成任何目标文件，只是把步骤打印出来了
-#如果要正常运行，把$(DEBUG)去掉就行了
 TGT = a.out
 SRCS = test.c cube.c circle.c
 OBJ = test.o cube.o circle.o
@@ -254,7 +252,7 @@ $(TGT):$(OBJ)
 	$(DEBUG) $(CC)  -c $^ -o $@
 
 
-.PHONY:
+.PHONY:clean
 clean:
 	rm $(OBJ) $(TGT)
 
@@ -273,8 +271,41 @@ clean:
 # shell命令相当于函数体
 # 每一行一个进程，不管这一行有多少命令
 # 总结，之前也学过makefile的语法，感觉规则挺多的，有些模式规则看过自己根本写不出来，如果用C语言的思想来看待makefile,发现一切都在情理之中。
+# 模式规则执行时，是一个循环取出的过程，每次取出一个.c,调用下面的命令生成对应的.o
+# 直到将所有的.c取完为止。
 
-#隐含规则
+# 其实这样写，并没有生成任何目标文件，只是把步骤打印出来了
+# 如果要正常运行，把$(DEBUG)去掉就行了
+# 或者使用下面这种写法，但是打印出来的进程号不是有效命令的进程号
+TGT = a.out
+SRCS = test.c cube.c circle.c a.c
+OBJ = test.o cube.o circle.o a.o
+CC = gcc
+DEBUG = @echo -n &quot;[$$$$]$@:$^\t&quot;
+
+
+$(TGT):$(OBJ)
+	$(DEBUG)
+	$(CC) $^ -o $@
+
+%.o:%.c
+	$(DEBUG) 
+	$(CC)  -c $^ -o $@
+	#$(CC) -c $&lt; -o $@
+
+
+.PHONY:clean
+clean:
+	rm $(OBJ) $(TGT)
+# [2569]test.o:test.c     gcc  -c test.c -o test.o
+# [2573]cube.o:cube.c     gcc  -c cube.c -o cube.o
+# [2577]circle.o:circle.c gcc  -c circle.c -o circle.o
+# [2581]a.o:a.c   gcc  -c a.c -o a.o
+# [2585]a.out:test.o cube.o circle.o a.o  gcc test.o cube.o circle.o a.o -o a.out
+
+#隐含规则 make -p
+# 如果我们显示写明某些规则，那么make会去隐含规则中查询是否有生成这个规则中的依赖的规则存在
+# 如果存在就会调用，不存在就会报错 
 TGT = a.out
 SRCS = test.c cube.c circle.c
 OBJ = test.o cube.o circle.o
@@ -285,12 +316,369 @@ DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
 $(TGT):$(OBJ)
 	$(DEBUG) $(CC) $^ -o $@
 
+# 在隐含规则中可以找到
+# %.o:%.c
+# 	$(CC) -c $^ -o $@
 
-.PHONY:
+
+.PHONY:clean
 clean:
 	rm $(OBJ) $(TGT)
 
+# gcc    -c -o test.o test.c
+# gcc    -c -o cube.o cube.c
+# gcc    -c -o circle.o circle.c
+# [3779]a.out:test.o cube.o circle.o      gcc test.o cube.o circle.o -o a.out
 
+
+# 模式规则
+TGT = a.out
+SRCS = test.c cube.c circle.c
+# OBJ = test.o cube.o circle.o
+CC = gcc
+DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
+
+$(TGT):$(SRCS:.c=.o)
+	$(DEBUG)
+	$(CC) $^ -o $@
+
+# %.o:%.c
+# 	$(CC) -c $^ -o $@
+
+.PHONY:clean
+clean:
+	rm $(OBJ) $(TGT)
+
+# 打印
+# 使用makefile内置函数打印信息，比echo作用域更广
+$(warning &quot;hello,world&quot;)
+# 可以放在shell cmd里面也可以放在外面
+# 放在外面的，在make扫描makefile的时候就执行了
+# 放在里面的，在执行shell cmd的的时候才会执行，而且不管在shell cmd的的第几行，都是最先执行的
+TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+$(warning &quot;1&quot;)
+all:
+	@echo $(HEAD_DIR)
+	$(warning &quot;2&quot;)
+
+$(warning &quot;3&quot;)
+
+.PHONY:clean
+clean:
+	rm $(OBJ) $(TGT)
+$(warning &quot;4&quot;)
+
+# Makefile:10: &quot;1&quot;
+# Makefile:16: &quot;3&quot;
+# Makefile:21: &quot;4&quot;
+# Makefile:14: &quot;2&quot;
+
+
+#引入头文件
+gcc test.c cube.c circle.c -I ./include/
+
+TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+# CROSS_COMPILER=arm-linux-
+CC=$(CROSS_COMPILER)gcc
+PRO_DIR=$(shell pwd)
+INCLUDE_DIR=$(PRO_DIR)/include
+# 指定编译选项
+CFLAGS=-I$(INCLUDE_DIR)
+
+
+$(TGT):$(SRCS:.c=.o)
+	$(CC) $^ -o $@
+
+%.o:%.c
+	$(CC) -c $^ $(CFLAGS) -o $@
+
+
+.PHONY:clean
+clean:
+	rm $(OBJ) $(TGT)
+
+# gcc -c test.c -I/home/albert/blog/makefile/test/include -o test.o
+# gcc -c cube.c -I/home/albert/blog/makefile/test/include -o cube.o
+# gcc -c circle.c -I/home/albert/blog/makefile/test/include -o circle.o
+# gcc test.o cube.o circle.o -o a.out
+
+
+#更智能的 SRCS:.c=.o
+TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+CC=gcc
+PRO_DIR=$(shell pwd)
+INCLUDE_DIR=$(PRO_DIR)/include
+CFLAGS=-I$(INCLUDE_DIR)
+
+$(TGT):$(SRCS:.c=.o)
+	$(CC) $^ -o $@
+
+
+.PHONY:clean
+clean:
+	rm $(OBJ) $(TGT)
+
+# gcc -I/home/albert/blog/makefile/test/include   -c -o test.o test.c
+# gcc -I/home/albert/blog/makefile/test/include   -c -o cube.o cube.c
+# gcc -I/home/albert/blog/makefile/test/include   -c -o circle.o circle.c
+# gcc test.o cube.o circle.o -o a.out
+
+
+#查看依赖关系 gcc -MM
+├── circle.c
+├── cube.c
+├── include
+│   ├── circle.h
+│   └── cube.h
+├── Makefile
+└── test.c
+gcc -MM -I./include  test.c
+test.o: test.c circle.h cube.h
+
+
+├── circle.c
+├── circle.h
+├── cube.c
+├── cube.h
+├── Makefile
+└── test.c
+gcc -MM test.c
+test.o: test.c circle.h cube.h
+
+
+# 下面的规则用来说明，头文件的更新
+# 应该使得所有依赖于它的文件被重新生成
+TGT = a.out
+SRCS = test.c cube.c circle.c
+OBJ = test.o cube.o circle.o
+CC=gcc
+PRO_DIR=$(shell pwd)
+INCLUDE_DIR=$(PRO_DIR)/include
+CFLAGS=-I$(INCLUDE_DIR)
+
+$(TGT):$(SRCS:.c=.o)
+	# $(CC) $^ -o $@
+
+# 此处测试用
+%.o:%.c
+	@$(CC) -MM $(CFLAGS) $^
+
+.PHONY:clean
+clean:
+	rm $(OBJ) $(TGT)
+
+# test.o: test.c include/circle.h include/cube.h
+# cube.o: cube.c include/cube.h
+# circle.o: circle.c include/circle.h
+# # gcc test.o cube.o circle.o -o a.out
+
+
+TGT = a.out
+SRCS = test.c cube.c circle.c
+CC=gcc
+PRO_DIR=$(shell pwd)
+INCLUDE_DIR=$(PRO_DIR)/include
+CFLAGS=-I$(INCLUDE_DIR)
+
+
+$(TGT):$(SRCS:.c=.o)
+	$(CC) $^ -o $@
+
+%.o:%.c
+	g++ $&lt; $(CFLAGS) -c
+
+%.d:%.c
+	$(CC) -MM $(CFLAGS) $^ &gt; $@
+# 下面一行用来告诉make，将上面的模式规则中的命令执行结果包含进当前文件
+sinclude $(SRCS:.c=.d)
+# include $(SRCS:.c=.d)
+# -include $(SRCS:.c=.d)
+
+
+.PHONY:clean
+clean:
+	rm $(TGT) $(SRCS:.c=.o) $(SRCS:.c=.d)
+
+# gcc -MM -I/home/albert/blog/makefile/test/include circle.c &gt; circle.d
+# gcc -MM -I/home/albert/blog/makefile/test/include cube.c &gt; cube.d
+# gcc -MM -I/home/albert/blog/makefile/test/include test.c &gt; test.d
+# g++ test.c -I/home/albert/blog/makefile/test/include -c
+# g++ cube.c -I/home/albert/blog/makefile/test/include -c
+# g++ circle.c -I/home/albert/blog/makefile/test/include -c
+# gcc test.o cube.o circle.o -o a.out
+#注意执行顺序
+
+#.d文件的作用
+
+
+
+# 伪目标.PHONY:clean
+# 不是一个真正的目标，仅仅是为了执行其所在规则下面的命令，
+# 不应该让make来判断它在makefile同级目录中是否存在，或者是否应该被生成
+.PHONY:clean
+clean:
+	rm $(TGT) $(SRCS:.c=.o) $(SRCS:.c=.d)
+
+
+
+
+# 主Makefile: 作用是制定规则来说明如何在当前目录下生成终极目标a.out
+# export全局变量
+TGT=a.out
+
+#指定当前所在目录
+export TOP_DIR=$(shell pwd)
+export HEAD_DIR=$(TOP_DIR)/head
+#指定子目录(生成a.out只会依赖于这些目录)
+SUB_DIR=tst main
+#递归子目标
+export SUB_TGT=built-in.o
+
+#指定编译器 编译选项
+export CC=g++
+export CFLAGS=-I$(HEAD_DIR) -Wall
+#指定链接器 链接选项
+export LD=ld
+export LDFLAGS=
+
+DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
+
+
+#主规则
+$(TGT):$(SUB_DIR)
+	$(CC) $(CFLAGS) $(^:=/$(SUB_TGT))
+
+# 下面的规则，用来告诉make,需要进入到a.out所依赖的那些子目录
+# make不需要去判断这个东西是否存在，不应该判断，存不存在也无所谓
+# -C 可以让make进入到后面指定的目录
+
+
+$(SUB_DIR):
+	make -C $@
+
+
+clean:
+	rm -vf $(TGT)
+	for dir in $(SUB_DIR); do \
+		make -C $$dir clean; \
+	done
+
+
+.PHONY:$(SUB_DIR) clean
+
+
+#sub
+# 子makefile
+# 用来告诉make如何生成当前目录下的子目标built-in.o
+
+SRCS=tst.cpp
+SUB_DIR=foo
+DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
+
+# 下面的规则，说明了如何生成当前目录下的子目标
+# 是由当前目录下的.c生成的.o 和当前目录下的子目录的子目标临时打包生成的
+# -r 临时打包
+$(SUB_TGT):$(SRCS:.cpp=.o) $(SUB_DIR)
+	$(LD) $(LDFLAGS) $(SRCS:.cpp=.o) $(SUB_DIR:=/$(SUB_TGT)) -r -o $@
+	
+
+%.o:%.cpp
+	$(CC) $(CFLAGS) -c $&lt; -o $@
+
+# .dep当头文件更新，依赖它的所有文件都要更新
+%.d:%.cpp
+	$(CC) $(CFLAGS) $&lt; -MM &gt;$@
+sinclude  $(SRCS:.cpp=.d)
+
+# sub
+$(SUB_DIR):
+	make -C $@
+
+clean:
+	rm -vf $(SUB_TGT) $(SRCS:.cpp=.o) $(SRCS:.cpp=.d)
+	for dir in $(SUB_DIR); do \
+		make -C $$dir clean; \
+		done
+
+.PHONY:$(SUB_DIR) clean
+
+
+#sub
+# 子makefile
+# 用来告诉make如何生成当前目录下的子目标built-in.o
+
+SRCS=foo.cpp
+DEBUG = @echo &quot;[$$$$]$@:$^\t&quot;
+
+
+# 下面的规则，说明了如何生成当前目录下的子目标
+# 是由当前目录下的.c生成的.o 和当前目录下的子目录的子目标临时打包生成的
+# -r 临时打包
+$(SUB_TGT):$(SRCS:.cpp=.o)
+	$(LD) $(LDFLAGS) $(SRCS:.cpp=.o) -r -o $@
+	
+
+%.o:%.cpp
+	$(CC) $(CFLAGS) -c $&lt; -o $@
+
+# .dep当头文件更新，依赖它的所有文件都要更新
+%.d:%.cpp
+	$(CC) $(CFLAGS) $&lt; -MM &gt;$@
+sinclude  $(SRCS:.cpp=.d)
+
+
+clean:
+	rm -vf $(SUB_TGT) $(SRCS:.cpp=.o) $(SRCS:.cpp=.d)
+
+.PHONY:clean
+
+
+
+# 修改.d文件
+# main.c -&gt; main.d.6106 -&gt; main.d
+# .dep当头文件更新，依赖它的所有文件都要更新
+%.d:%.cpp
+	$(CC) $(CFLAGS) $&lt; -MM &gt;$@.$$$$; \
+	sed 's/$*.o: /$*.o $*.d: /' $@.$$$$ &gt; $@; \
+	rm -vf $@.$$$$
+sinclude  $(SRCS:.cpp=.d)
+
+
+
+# 终极目标需要更新的情况
+# 1.不存在
+# 2.存在，时间戳比它的依赖的时间更旧
+# 3.存在，它的依赖需要更新
+
+# 更新目标之前，它的依赖处于的状态可能有
+# 1.不存在，先去执行以它为目标的规则
+# 2.存在，以这个依赖为目标的规则存在
+# 3.存在，以这个依赖为目标的规则不存在，会去隐含规则中查找是否有相应的规则
+
+
+main.c fun.c fun.h
+SRCS:.c=.d 
+%d:%c
+如果这个时候echo $^，打印出
+main.c
+fun.c
+在cmd中可以使用$^或者$&lt;
+
+
+%o:%c
+如果这个时候echo $^，打印出
+main.c fun.h
+fun.c fun.h
+在cmd中使用$&lt;,而不使用$^
+
+综上所述:
+在cmd中依赖使用$&lt;
 </code></pre>
 
                 </div>

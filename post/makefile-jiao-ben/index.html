@@ -6,7 +6,7 @@
 
 <title>Makefile脚本 | Albert NoteBook</title>
 
-<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1614535217589">
+<link rel="shortcut icon" href="https://wwwwwalter.github.io/favicon.ico?v=1615910570354">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wwwwwalter.github.io/styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1614535217589" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1615910570354" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -129,7 +129,7 @@
 [TAB]指令<br>
 第一个目标文件是最终目标<br>
 rm -fr main.i main.S main.o main<br>
-伪目标：.PHONY:</p>
+伪目标：.PHONY:clean</p>
 <pre><code>main:main.o
     g++ main.o -o main
 main.o:main.S
@@ -139,7 +139,7 @@ main.S:main.i
 main.i:main.cpp
     g++ -E main.cpp -o main.i
 
-.PHONY:
+.PHONY:clean_all clean
 clean_all:
     rm -fr main.i main.S main.o main
 clean:
@@ -183,7 +183,7 @@ circle.o:circle.c
 cube.o:cube.c
 	$(CC) -c cube.c -o cube.o
 
-.PHONY:
+.PHONY:clean
 clean:
 	rm $(OBJ) $(TAR)
 </code></pre>
@@ -212,7 +212,7 @@ $(TAR):$(OBJ)
 	$(CC) -c $^ -o $@
 
 
-.PHONY:
+.PHONY:clean
 clean:
 	$(RMRF) $(OBJ) $(TAR)
 </code></pre>
